@@ -9,7 +9,6 @@
 #import <time.h>
 #import "NSString+Additions.h"
 #import <CommonCrypto/CommonDigest.h>
-#import "ISO8601DateFormatter.h"
 
 @implementation NSString (Additions)
 
@@ -38,37 +37,6 @@
   NSRange range = [self rangeOfString:needle options: NSCaseInsensitiveSearch];
   return (range.length == needle.length && range.location == (self.length-range.length-1));
 }
-
-- (NSString *)URLEncodedString
-{
-  __autoreleasing NSString *encodedString;
-  
-  NSString *originalString = (NSString *)self;    
-  encodedString = (__bridge_transfer NSString * )
-  CFURLCreateStringByAddingPercentEscapes(NULL,
-                                          (__bridge CFStringRef)originalString,
-                                          (CFStringRef)@"$-_.+!*'(),&+/:;=?@#",
-                                          NULL,
-                                          kCFStringEncodingUTF8);
-  encodedString = [encodedString stringByReplacingOccurrencesOfString:@"%25" withString:@"\%"];   //revert double escape
-  return encodedString;
-}
-
-- (NSString *)URLEncodeEverything
-{
-    __autoreleasing NSString *encodedString;
-    
-    NSString *originalString = (NSString *)self;    
-    encodedString = (__bridge_transfer NSString * )
-    CFURLCreateStringByAddingPercentEscapes(NULL,
-                                            (__bridge CFStringRef)originalString,
-                                            NULL,
-                                            (CFStringRef)@"$-_.+!*'(),&+/:;=?@#",
-                                            kCFStringEncodingUTF8);
-    encodedString = [encodedString stringByReplacingOccurrencesOfString:@"%25" withString:@"\%"];   //revert double escape
-    return encodedString;
-}
-
 
 - (NSString *)sha1 {
   const char *cStr = [self UTF8String];
@@ -99,16 +67,6 @@
                  ];
   
   return s;
-}
-
-- (NSDate*)dateFromString
-{
-  static ISO8601DateFormatter *dateFormatter = nil;
-  if (dateFormatter == nil)
-    dateFormatter = [[ISO8601DateFormatter alloc] init];
-
-  NSDate *theDate = [dateFormatter dateFromString:self];
-  return theDate;
 }
 
 - (NSString *)camelCaseToUnderscore
