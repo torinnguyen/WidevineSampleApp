@@ -16,12 +16,12 @@
 
 - (id)initWithEventEmitter:(BCEventEmitter *)eventEmitter plugin:(BCWidevinePlugin *) widevinePlugin;
 
-@property(nonatomic,retain) IBOutlet UIView *widevineInfoView;
+@property(nonatomic, strong) IBOutlet UIView *widevineInfoView;
 
-@property(nonatomic, retain) BCWidevinePlugin *widevinePlugin;
+@property(nonatomic, strong) BCWidevinePlugin *widevinePlugin;
 
-@property(assign,nonatomic) IBOutlet VideoViewCell *videoCell;
+@property(nonatomic, weak) IBOutlet VideoViewCell *videoCell;
 
-@property(strong,nonatomic) IBOutlet UITableView *tableView;
+@property(nonatomic, strong) IBOutlet UITableView *tableView;
 
 @end

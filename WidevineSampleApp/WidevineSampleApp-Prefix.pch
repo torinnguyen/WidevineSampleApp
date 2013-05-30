@@ -9,6 +9,13 @@
 #endif
 
 #ifdef __OBJC__
-    #import <UIKit/UIKit.h>
-    #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+
+#import "NSString+Additions.h"
+
+#import "AFNetworking.h"
+#import "WCAlertView.h"
+#import "SVProgressHUD.h"
+
 #endif
